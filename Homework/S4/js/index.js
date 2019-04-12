@@ -1,6 +1,7 @@
 var renderer, scene, camera;
 var cubes = [];
 var rot = 0;
+var controls;
 
 function init() {
   scene = new THREE.Scene();
@@ -35,6 +36,7 @@ function init() {
 
       mesh.position.x = x;
       mesh.position.z = y;
+      mesh.rotation.y= 360*Math.random();
 
       scene.add(mesh);
       cubes.push(mesh);
@@ -44,18 +46,14 @@ function init() {
   document.body.appendChild(renderer.domElement);
 }
 
-function animation(){
+function drawFrame(){
+  requestAnimationFrame(drawFrame);
 
-  mesh.rotate.y+=0.01;
-  requestAnimationFrame(animation);
+  rot += 0.01;
+  cubes.forEach(function(c,i){
+    c.rotation.z=rot;
+  });
 
-
-
-
-  //forEach takes all the array entries and passes the c as the object, and i as the index
-  //cubes.forEach(function(c, i) {
-    //c.rotation.x = rot; //Rotate the object that is referenced in c
-  //});
 
   renderer.render(scene, camera);
 }
