@@ -14,6 +14,7 @@ function setup() {
   setupThreeJS();
   setupWorld();
 
+//Execute the animation and ask the browser to call the specified function to update the animation before the next redraw.
   requestAnimationFrame(function animate() {
     draw();
 
@@ -29,20 +30,20 @@ function setup() {
 }
 
 function setupThreeJS() {
-  scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x9db3b5, 0.0007);
+  scene = new THREE.Scene(); //Define the scene
+  scene.fog = new THREE.FogExp2(0x9db3b5, 0.0007);//Define the atomization effect
 
-  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 ); //Define the camera and it's index
   camera.position.y = 400;
   camera.position.z = 400;
   camera.rotation.x = -45 * Math.PI / 180;
 
-  renderer = new THREE.WebGLRenderer({antialias: true});
+  renderer = new THREE.WebGLRenderer({antialias: true}); //Define the renderer and it's render effect
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.shadowMapEnabled = true;
   renderer.setClearColor(0x454759, 1);
 
-  document.body.appendChild( renderer.domElement );
+  document.body.appendChild( renderer.domElement );//Output renderer
 
   clock = new THREE.Clock();
   controls = new THREE.FirstPersonControls(camera);
@@ -50,6 +51,7 @@ function setupThreeJS() {
   controls.lookSpeed = 0.1;
 }
 
+//Ray trigger event
 function rayBreathing() {
 			document.addEventListener('click', ray);
 
@@ -69,7 +71,7 @@ function rayBreathing() {
 
 					let bone = intersects[0].object
 					let name = bone.name
-					alert(`Introduction to this planet:${name}`)
+					alert(`Introduction to this planet:${name}`) //Alert the  Dialog
 
 				}
 			}
@@ -96,7 +98,7 @@ function setupWorld() {
   mesh3.position.x = 500;
   mesh3.position.y = 20;
   mesh3.position.z = 10;
-  Bplace.push(mesh3);
+  Bplace.push(mesh3); //put the planet into the Bplace
 
    //The second planet
     var geometry4 = new THREE.IcosahedronGeometry(70,1);
@@ -153,9 +155,9 @@ function setupWorld() {
        mesh8.position.z = 200;
        Bplace.push(mesh8);
 
-      //mesh5的公转小行星
-       var pivotPoint2 = new THREE.Object3D();
-       mesh5.add(pivotPoint2); //把轴点放进mesh3行星中
+      //Asteroid that revolves around the mesh5
+       var pivotPoint2 = new THREE.Object3D();// Set a pivotPoint
+       mesh5.add(pivotPoint2); //Put the pivot point in the star
 
        var geo13 = new THREE.OctahedronGeometry(8,1);
        var mat13 = new THREE.MeshPhongMaterial({color:0xff6347,fog:true});
@@ -164,7 +166,7 @@ function setupWorld() {
        gmesh13.position.x = 50;
        gmesh13.position.y = 100;
        gmesh13.position.z = 80;
-       pivotPoint2.add(gmesh13);
+       pivotPoint2.add(gmesh13);//Put the asteroid into the pivotpoint
 
        var geo14 = new THREE.OctahedronGeometry(6,1);
        var mat14 = new THREE.MeshPhongMaterial({color:0x7fffd4,fog:true});
@@ -346,7 +348,7 @@ function setupWorld() {
           requestAnimationFrame( render );
           //mesh3旋转
           //mesh3.rotation.x += 0.01;
-          mesh3.rotation.y += 0.01;
+          mesh3.rotation.y += 0.01; //make mesh3 move
 
           //mesh4旋转
           mesh4.rotation.x += 0.01;
@@ -363,7 +365,7 @@ function setupWorld() {
           mesh8.rotation.x += 0.05;
           mesh8.rotation.y += 0.01;
 
-
+// render all the objects
           renderer.render(scene, camera);
       };
 
@@ -379,15 +381,15 @@ function setupWorld() {
 
 
 
-  //宇宙中的小星星
+  //Small stars in the space
   var geo1 = new THREE.SphereGeometry(0.5,8,8);
 
   var mat1 = new THREE.MeshPhongMaterial({overdraw: true,color:0xf5deb3,wireframe:false,fog:true,
     opacity:0.7,transparent:true});
 
   var plantGeometry = new THREE.Geometry();
-  for (var i = 0; i < 30; i++) {
-    var gp = new THREE.Mesh(geo1.clone());
+  for (var i = 0; i < 30; i++) { //Increase the number of stars by calculation
+    var gp = new THREE.Mesh(geo1.clone());//Assign a group to clone the number of stars
 
     gp.position.x = Math.floor( Math.random() * 1000 - 500 ) * 2;
     gp.position.z = Math.floor( Math.random() * 1000 - 500 ) * 2;
@@ -398,18 +400,16 @@ function setupWorld() {
 
 
     THREE.GeometryUtils.merge(plantGeometry,gp);
-  }
+  } //Combine all the groups to form the entire starry sky
 
   var plant1 = new THREE.Mesh(plantGeometry,mat1);
 
-  //Settings for models and material
+
+
   var geometry = new THREE.SphereGeometry( 0.1, 8, 8 );
-  //geometry.applyMatrix( new THREE.Matrix4().makeTranslation( 0, 0.5, 0 ) );
   var material = new THREE.MeshLambertMaterial({overdraw: true, color: 0xf0fff0 ,wireframe:false,fog:true});
-  //Geometry to store all buildings of the city
   var cityGeometry = new THREE.Geometry();
   for (var i = 0; i < 8000; i++) {
-    //Create geometry as a clone
     var building = new THREE.Mesh(geometry.clone());
 
     //Randomize position and scale of the buildings
