@@ -23,7 +23,7 @@ function init() {
   light.position.set( 1, 1, 1 ).normalize();
   scene.add( light );
 
-  var geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
+  var geometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
 
   for (var i=0; i<500; i++){
 
