@@ -1,6 +1,5 @@
 // GLOBALS ======================================================
 var camera, scene, renderer, controls, clock,Bplace = [];
-var texture;
 var INV_MAX_FPS = 1 / 100, frameDelta = 0;
 
 var floor;

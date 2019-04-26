@@ -1,3 +1,7 @@
+#Name: Chen BoYu
+#Number: B161006060
+
+
 #Content of the work:
   I made a small part of the universe, the scene contains some major planets and some minor asteroids. Clicking on each of the major planets will bring up a different introduction to the planet.
 
